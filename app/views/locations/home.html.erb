@@ -1,5 +1,9 @@
 <h1>Home Page - locations#home</h1>
 
 <div id="user_nav">
+  <% if current_user %>
+  Welcome, <%= current_user.name %>!
+  <% else %>
   <%= link_to "Sign in with Twitter", "/auth/twitter" %>
-</div>  
+  <% end %>
+</div>
