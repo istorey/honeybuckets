@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   match "/auth/:provider/callback" => "sessions#create", via: [:get]
 
+  match "/signout" => "sessions#destroy", :as => :signout, via: [:get]
+
   get "map" => "locations#map"
 
   root "locations#home"

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.name = auth["name"]
+      user.name = auth["screen_name"]
     end
   end
 end
