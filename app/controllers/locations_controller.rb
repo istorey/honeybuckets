@@ -1,6 +1,13 @@
 class LocationsController < ApplicationController
   def home
-    @tweets = twitter_client.search("#honeybucket").take(3) 
+
+    @embed = []
+    tweets = twitter_client.search("#honeybucket").take(3)
+    #converting tweets to oembed objects
+    tweets.each do |tweet|
+      @embed << twitter_client.oembed(tweet.id)
+    end
+
   end
 
   def map
