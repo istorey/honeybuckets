@@ -12,12 +12,32 @@ class LocationsController < ApplicationController
 
   def map
     # @ip_address = request.remote_ip
-    @ip_address = "50.200.196.50"
-  if params[:search].present?
-    @locations = Location.near(params[:search], 50, :order => :distance)
-  else
-    @locations = Location.all
-  end
+    # if params[:search].present?
+    #   @locations = Location.near(params[:search], 50, :order => :distance)
+    # else
+    #   @locations = Location.all
+    # end
+    # Latitude: 38.903891736417684<br />Longitude: -77.0342230796814
+    @location = Location.new(lat: 38.903891736417684, long: -77.0342230796814, name: "PNC", address: "123 Fake Street")
+    @geojson = {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [@location.long, @location.lat]
+        },
+        properties: {
+          name: @location.name,
+          address: @location.address,
+          :'marker-color' => '#00607d',
+          :'marker-symbol' => 'circle',
+          :'marker-size' => 'medium'
+        }
+      }
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @geojson }
+    end
   end
 
   def show
