@@ -8,18 +8,24 @@
 <% end %>
 </ul>
 
-<form>
-<input name="star1" type="radio" class="star"/> 
-<input name="star1" type="radio" class="star"/> 
-<input name="star1" type="radio" class="star"/> 
-<input name="star1" type="radio" class="star"/> 
-<input name="star1" type="radio" class="star"/> 
-
-
-
 <%= form_for [@location, @review] do |r| %>
-	<%= r.label :body %>
-	<%= r.text_field :body %>
+	<%= r.label :review %><br>
+	<%= r.text_field :body %><br>
+	<!-- <span class="star-cb-group"> -->
+	<%= r.radio_button :rating, 1, {class: "test"} %>
+	<%= r.radio_button :rating, 2, {class: "test"}  %>
+	<%= r.radio_button :rating, 3, {class: "test"}  %>
+	<%= r.radio_button :rating, 4, {class: "test"}  %>
+	<%= r.radio_button :rating, 5, {class: "test"}  %> 
+	</span>
+	<br>
 	<%= r.submit %>
 <% end %>
-</form>
+
+
+<ul>
+ <% @reviews.each do |review| %>
+ 	<li><%= review.body %></li>
+ 	<li><%= review.rating %></li>
+ <%end%>
+</ul>

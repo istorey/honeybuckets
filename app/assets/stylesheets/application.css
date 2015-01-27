@@ -13,4 +13,6 @@
  *= require_tree .
  *= require_self
  *= require './locations.css'
+ *= require 'rating.scss'
+ *= require styles
  */
