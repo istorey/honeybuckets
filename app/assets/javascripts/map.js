@@ -17,6 +17,7 @@ window.onload = function(){
   // Center map on user when found
   map.on('locationfound', function(e){
     map.setView([e.latitude, e.longitude], 17);
+    //Populate locations
     $.ajax({
       url: '/map',
       dataType: 'json',
@@ -26,7 +27,6 @@ window.onload = function(){
       }
     });
   });
-  //Populate locations
 
 
   // Creating a search bar
