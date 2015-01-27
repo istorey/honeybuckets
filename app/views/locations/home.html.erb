@@ -8,3 +8,11 @@
   <%= link_to "Sign in with Twitter", "/auth/twitter" %>
   <% end %>
 </div>
+
+
+<%= form_tag map_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
