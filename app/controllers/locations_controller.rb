@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   def home
+    @tweets = twitter_client.search("#honeybucket").take(3) 
   end
 
   def map
