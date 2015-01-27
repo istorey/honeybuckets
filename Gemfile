@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'geocoder'
 gem 'twitter'
 gem 'omniauth-twitter'
 gem 'figaro'

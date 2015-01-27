@@ -1,4 +1,9 @@
 class Location < ActiveRecord::Base
   has_many :reviews
-  after_validation :geocode, if: ->(location){ location.address.present? and obj.address_changed? }
+  reverse_geocoded_by :lat, :long
+  	:adress => :location
+  after_validation :reverse_geocode
+  
+  geocoded_by :address
+  after_validation :geocode
 end
