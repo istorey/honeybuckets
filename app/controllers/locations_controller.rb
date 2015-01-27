@@ -11,6 +11,8 @@ class LocationsController < ApplicationController
   end
 
   def map
+    # @ip_address = request.remote_ip
+    @ip_address = "50.200.196.50"
   if params[:search].present?
     @locations = Location.near(params[:search], 50, :order => :distance)
   else
