@@ -11,6 +11,14 @@
 </div>
 
 
+
 <% @embed.each do |embed| %>
 <%= raw(embed.html) %>
+<% end %>
+
+<%= form_tag map_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
 <% end %>
