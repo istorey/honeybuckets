@@ -41,10 +41,13 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @location = Location.new(lat:0, long:0)
+    @location = Location.find(params[:id])
+    @review = Review.new
   end
 
   def new
+    @location = Location.new
+    @review = Review.new
   end
 
   def create
