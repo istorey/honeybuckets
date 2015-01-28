@@ -1,4 +1,14 @@
 window.onload = function(){
+  
+  var markerLat;
+  var markerLong;
+  
+  function getCoordinates() {
+    var m = marker.getLatLng();
+      markerLat = m.lat;
+      markerLong = m.lng;
+  };
+  
 
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFja3ZjdXJ0cyIsImEiOiJkOEw2U1JnIn0.aeu27bx-JO85y318dm5tSw';
   var map = L.mapbox.map('map', 'jackvcurts.l24gabk5')
@@ -6,30 +16,6 @@ window.onload = function(){
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
   // Find user on page load
   map.locate()
-
-  var geojson = {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-77.03, 38.89]
-    },
-    properties: {
-      title: "Test place",
-      description: "123 Fake Street",
-      'marker-color': '#00607d',
-      'marker-symbol': 'circle',
-      'marker-size': 'medium',
-      url: '/'
-    }
-  };
-
-  //Creating a link from each location
-  var bathroomLayer = L.mapbox.featureLayer().addTo(map);
-  bathroomLayer.setGeoJSON(geojson);
-  bathroomLayer.on('click', function(e) {
-      e.layer.unbindPopup();
-      window.open(e.layer.feature.properties.url);
-  });
 
   // Create a draggable marker
   var marker = L.marker([38.89, -77.03], {
@@ -43,7 +29,7 @@ window.onload = function(){
   map.on('locationfound', function(e) {
     map.setView([e.latitude, e.longitude], 17);
     marker.setLatLng([e.latitude, e.longitude]);
-    console.log(marker._latlng.lat);
+    getCoordinates();
   });
 
   //Log marker coordinates on drag end
@@ -51,8 +37,8 @@ window.onload = function(){
   
 
   function ondragend() {
-      var m = marker.getLatLng();
-      console.log('Latitude: ' + m.lat + '<br />Longitude: ' + m.lng);
+      getCoordinates();
+      console.log('Latitude: ' + markerLat + ' Longitude: ' + markerLong);
   }
 
   // Creating a search bar
@@ -69,4 +55,24 @@ window.onload = function(){
     var location = res.feature.geometry;
     marker.setLatLng([location.coordinates[1], location.coordinates[0]])
   });
+
+  $('#location_submit').on("click", function(e){
+    e.preventDefault();
+    var name = $('#location_name').val();
+    getCoordinates();
+    var data = {"name": name, "lat": markerLat, "long": markerLong};
+    $.ajax({
+      url:"/locations",
+      dataType: "json",
+      type: "POST",
+      data: {location: data},
+      success: function(response){
+        console.log("responded");
+        var url = response.location;
+        console.log(url);
+        window.location.href = url;
+      }
+    }); 
+  });
+
 }

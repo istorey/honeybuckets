@@ -1,13 +1,13 @@
 class LocationsController < ApplicationController
+  protect_from_forgery
+  
   def home
-
     @embed = []
     tweets = twitter_client.search("#honeybuckets").take(10)
     #converting tweets to oembed objects
     tweets.each do |tweet|
       @embed << twitter_client.oembed(tweet.id)
     end
-
   end
 
   def map
@@ -18,22 +18,24 @@ class LocationsController < ApplicationController
     #   @locations = Location.all
     # end
     # Latitude: 38.903891736417684<br />Longitude: -77.0342230796814
-    @location = Location.new(lat: 38.903891736417684, long: -77.0342230796814, name: "PNC", address: "123 Fake Street")
-    @geojson = {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [@location.long, @location.lat]
-        },
-        properties: {
-          name: @location.name,
-          address: @location.address,
-          :'marker-color' => '#00607d',
-          :'marker-symbol' => 'circle',
-          :'marker-size' => 'medium'
+    @locations = Location.all
+    @geojson = []
+    @locations.each do |location|
+      @geojson << {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [location.long, location.lat]
+          },
+          properties: {
+            name: location.name,
+            address: location.address,
+            :'marker-color' => '#00607d',
+            :'marker-symbol' => 'circle',
+            :'marker-size' => 'medium'
+          }
         }
-      }
-    
+    end
     respond_to do |format|
       format.html
       format.json { render json: @geojson }
@@ -51,6 +53,17 @@ class LocationsController < ApplicationController
   end
 
   def create
-    
+    @location = Location.new(location_params)
+    @location.save
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => {location: location_path(@location)} }
+    end
+  end
+
+private
+  def location_params
+    params.require(:location).permit(:name, :lat, :long)
   end
 end
