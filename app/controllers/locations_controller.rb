@@ -68,6 +68,10 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
+    @address_components = Geocoder.search("#{@location.lat}, #{@location.long}")[0].data["address_components"]
+    @street_num = @address_components[0]["long_name"]
+    @street = @address_components[1]["long_name"]
+    @location.address = @street_num + @street
     @location.save
 
     respond_to do |format|
