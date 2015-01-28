@@ -1,4 +1,6 @@
-<h1>location#map</h1>
-<h1><%= @ip_address %></h1>
+<% if @search %>
+  <h2>Honeybuckets near <span id="search"><%= @search %></span></h2>
+<% end %>
+
 <div id="map"></div>
 <%= javascript_include_tag "map" %>
