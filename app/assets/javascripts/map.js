@@ -37,6 +37,7 @@ window.onload = function(){
                       '<h3>' + properties.name + '</h3>' +
                       '<p>' + properties.address + '</p>' +
                       '<p><a href='+ properties.url +' >' + properties.url + '</a></p>' +
+                      '<p>' + properties.rating + '</p>' +
                     '</div>';
 
     marker.bindPopup(popupContent,{

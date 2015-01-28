@@ -16,16 +16,10 @@ class LocationsController < ApplicationController
   # end
 
   def map
-    # @ip_address = request.remote_ip
-    # if params[:search].present?
-    #   @locations = Location.near(params[:search], 50, :order => :distance)
-    # else
-    #   @locations = Location.all
-    # end
-    # Latitude: 38.903891736417684<br />Longitude: -77.0342230796814
     @locations = Location.all
     @geojson = []
     @locations.each do |location|
+      rating = location.reviews.average(:rating)
       @geojson << {
           type: 'Feature',
           geometry: {
@@ -39,6 +33,7 @@ class LocationsController < ApplicationController
             :'marker-symbol' => 'circle',
             :'marker-size' => 'medium',
             :'url' => location_path(location),
+            :'rating' => rating
           }
         }
     end
