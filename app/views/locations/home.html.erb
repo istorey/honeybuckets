@@ -10,6 +10,9 @@
   <h2><%= link_to "View Map", "/map" %></h2>
 </div>
 
+<% @honey_embed.each do |embed| %>
+<%= raw(embed.html) %>
+<% end %>
 
 
 <% @embed.each do |embed| %>
