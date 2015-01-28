@@ -4,8 +4,12 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = @current_user.id
     @review.location_id = params[:location_id].to_i
-    @review.save
-    redirect_to(:back)
+      if @review.save
+        redirect_to(:back)
+      else
+        flash[:notice]="You must select a rating to submit a review"
+        redirect_to(:back)
+      end
     else
     redirect_to root_path
     end
