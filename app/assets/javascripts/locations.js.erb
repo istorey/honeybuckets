@@ -1,4 +1,5 @@
-$('document').ready(function(){
+// $('document').ready(function(){
+function initialize(){
     //Initialize map
     L.mapbox.accessToken = 'pk.eyJ1IjoiamFja3ZjdXJ0cyIsImEiOiJkOEw2U1JnIn0.aeu27bx-JO85y318dm5tSw';
     var map = L.mapbox.map('map', 'jackvcurts.l24gabk5')
@@ -22,7 +23,7 @@ $('document').ready(function(){
       }
     });
   }
-  
+
   function centerOnSearch(){
     $.ajax({
       url: '/map',
@@ -142,4 +143,5 @@ $('document').ready(function(){
       createLocationListener();      
     } 
   });
-});
+}
+// );
