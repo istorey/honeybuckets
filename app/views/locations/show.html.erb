@@ -1,3 +1,4 @@
+<%= javascript_include_tag "location_show" %>
 <div id="map"></div>
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.lat}%2C#{@location.long}" %>
@@ -8,24 +9,10 @@
 <% end %>
 </ul>
 
-<h1><%= @current_user %></h1>
+<% if @user.name == "guest" %>
+<h1><%= @user.name %></h1>
 
-<%= form_for [@location, @review] do |r| %>
-	<%= r.label :review %><br>
-	<%= r.text_field :body %><br>
-	<!-- <span class="star-cb-group"> -->
-	<%= r.radio_button :rating, 1, {class: "test"} %>
-	<%= r.radio_button :rating, 2, {class: "test"}  %>
-	<%= r.radio_button :rating, 3, {class: "test"}  %>
-	<%= r.radio_button :rating, 4, {class: "test"}  %>
-	<%= r.radio_button :rating, 5, {class: "test"}  %>
-	</span>
-	<br>
-	<%= r.submit %>
-<% end %>
-
-
-<ul>
+<ul class="reviews">
  <% @reviews.each do |review| %>
  	<li><%= review.body %></li>
  	<li><%= review.rating %></li>
@@ -33,4 +20,42 @@
 </ul>
 
 <h2>Average Rating</h2>
-<%= @rating %>
+<%= @rating.round(2) %>
+
+<% else %>
+
+<h1><%= @user.name %></h1>
+
+<% if flash[:notice] %>
+<div class="notice">
+<%= flash[:notice] %>
+
+</div>
+<% end %>
+
+<%= form_for [@location, @review] do |r| %>
+  <%= r.label :review %><br>
+  <%= r.text_field :body %><br>
+  <span class="rating">
+  <%= r.radio_button :rating, 1, {class: "rating"}  %>
+  <%= r.radio_button :rating, 2, {class: "rating"}  %>
+  <%= r.radio_button :rating, 3, {class: "rating"}  %>
+  <%= r.radio_button :rating, 4, {class: "rating"}  %>
+  <%= r.radio_button :rating, 5, {class: "rating"}  %>
+  </span>
+  <br>
+  <%= r.submit %>
+<% end %>
+
+<ul class="reviews">
+ <% @reviews.each do |review| %>
+   <li><%= review.body %></li>
+   <li><%= review.rating %></li>
+ <%end%>
+</ul>
+
+<h2>Average Rating</h2>
+<%= @rating.round(2) %>
+
+<% end %>
+

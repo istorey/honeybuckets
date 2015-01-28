@@ -9,10 +9,10 @@ window.onload = function(){
 
   //Creating a link from each location
   var bathroomLayer = L.mapbox.featureLayer().addTo(map);
-  bathroomLayer.on('click', function(e) {
-      e.layer.unbindPopup();
-      window.open(e.layer.feature.properties.url);
-  });
+  // bathroomLayer.on('click', function(e) {
+  //     e.layer.unbindPopup();
+  //     window.open(e.layer.feature.properties.url);
+  // });
 
   // Center map on user when found
   map.on('locationfound', function(e){
@@ -28,12 +28,43 @@ window.onload = function(){
     });
   });
 
+  // Bind popups to each marker
+  map.featureLayer.on('layeradd', function(e){
+    console.log(e);
+    var marker = e.layer;
+    var properties = marker.feature.properties;
+    var popupContent =  '<div class="popup">' +
+                      '<h3>' + properties.name + '</h3>' +
+                      '<p>' + properties.address + '</p>' +
+                      '<p><a href='+ properties.url +' >' + properties.url + '</a></p>' +
+                      '<p>' + properties.rating + '</p>' +
+                    '</div>';
+
+    marker.bindPopup(popupContent,{
+      closeButton: false,
+      minWidth: 320
+      })
+    });
+
+
+
 
   // Creating a search bar
   // Initialize the geocoder control and add it to the map.
   var geocoderControl = L.mapbox.geocoderControl('mapbox.places', {
     autocomplete: true
   });
+
+  //center on icons
+   map.featureLayer.on('click', function(e) {
+        map.panTo(e.layer.getLatLng());
+    });
+
+  // // Link to show page on click
+  // bathroomLayer.on('click', function(e) {
+  //     e.layer.unbindPopup();
+  //     window.open(e.layer.feature.properties.url);
+  // });
 
   geocoderControl.addTo(map);
 }

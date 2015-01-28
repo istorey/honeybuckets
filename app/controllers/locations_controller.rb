@@ -1,31 +1,25 @@
 class LocationsController < ApplicationController
   protect_from_forgery
 
-  def home
-    @embed = []
-    @honey_embed = []
-    tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
-    honey = twitter_client.search("honeybuckets").take(10)
-    #converting tweets to oembed objects
-    tweets.each do |tweet|
-      @embed << twitter_client.oembed(tweet.id)
-    end
-    honey.each do |tweet|
-      @honey_embed << twitter_client.oembed(tweet.id)
-    end
-  end
+  # def home
+  #   @embed = []
+  #   @honey_embed = []
+  #   tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
+  #   honey = twitter_client.search("honeybuckets").take(10)
+  #   #converting tweets to oembed objects
+  #   tweets.each do |tweet|
+  #     @embed << twitter_client.oembed(tweet.id)
+  #   end
+  #   honey.each do |tweet|
+  #     @honey_embed << twitter_client.oembed(tweet.id)
+  #   end
+  # end
 
   def map
-    # @ip_address = request.remote_ip
-    # if params[:search].present?
-    #   @locations = Location.near(params[:search], 50, :order => :distance)
-    # else
-    #   @locations = Location.all
-    # end
-    # Latitude: 38.903891736417684<br />Longitude: -77.0342230796814
     @locations = Location.all
     @geojson = []
     @locations.each do |location|
+      rating = location.reviews.average(:rating)
       @geojson << {
           type: 'Feature',
           geometry: {
@@ -37,7 +31,9 @@ class LocationsController < ApplicationController
             address: location.address,
             :'marker-color' => '#00607d',
             :'marker-symbol' => 'circle',
-            :'marker-size' => 'medium'
+            :'marker-size' => 'medium',
+            :'url' => location_path(location),
+            :'rating' => rating
           }
         }
     end
@@ -53,6 +49,34 @@ class LocationsController < ApplicationController
     @reviews = Review.where(location_id: params[:id])
     current_ratings = @reviews.pluck(:rating)
     @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
+
+    @geojson = {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [@location.long, @location.lat]
+          },
+          properties: {
+            name: @location.name,
+            address: @location.address,
+            :'marker-color' => '#00607d',
+            :'marker-symbol' => 'circle',
+            :'marker-size' => 'medium',
+            :'url' => location_path(@location),
+            :'rating' => @rating
+          }
+        }
+
+    if current_user
+      @user = User.find(session[:user_id])
+    else
+      @user = User.new(name: "guest")
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @geojson }
+    end
   end
 
   def new
@@ -62,6 +86,10 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
+    @address_components = Geocoder.search("#{@location.lat}, #{@location.long}")[0].data["address_components"]
+    @street_num = @address_components[0]["long_name"]
+    @street = @address_components[1]["long_name"]
+    @location.address = @street_num + @street
     @location.save
 
     respond_to do |format|
