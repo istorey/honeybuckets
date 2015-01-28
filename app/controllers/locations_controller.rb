@@ -2,12 +2,12 @@ class LocationsController < ApplicationController
   def home
 
     @embed = []
-    tweets = twitter_client.search("#honeybuckets").take(10)
+    tweets = twitter_client.search("q", :geocode => "37.781157,-122.398720,1mi").take(10)
+
     #converting tweets to oembed objects
     tweets.each do |tweet|
       @embed << twitter_client.oembed(tweet.id)
     end
-
   end
 
   def map
