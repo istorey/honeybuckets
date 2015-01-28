@@ -28,7 +28,23 @@ window.onload = function(){
   map.featureLayer.on('click', function(e) {
       map.panTo(e.layer.getLatLng());
   });
+  
+  map.featureLayer.on('layeradd', function(e){
+    console.log(e);
+    var marker = e.layer;
+    var properties = marker.feature.properties;
+    var popupContent =  '<div class="popup">' +
+                      '<h3>' + properties.name + '</h3>' +
+                      '<p>' + properties.address + '</p>' +
+                      '<p><a href='+ properties.url +' >' + properties.url + '</a></p>' +
+                      '<p>' + properties.rating + '</p>' +
+                    '</div>';
 
+    marker.bindPopup(popupContent,{
+      closeButton: false,
+      minWidth: 320
+      })
+    });
   // Creating a search bar
   // Initialize the geocoder control and add it to the map.
   var geocoderControl = L.mapbox.geocoderControl('mapbox.places', {
