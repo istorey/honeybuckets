@@ -36,4 +36,17 @@ window.onload = function(){
   });
 
   geocoderControl.addTo(map);
+
+  //center on icons
+   map.featureLayer.on('click', function(e) {
+        map.panTo(e.layer.getLatLng());
+    });
+
+   //links
+   myLayer.setGeoJSON(geojson);
+myLayer.on('click', function(e) {
+    e.layer.unbindPopup();
+    window.open(e.layer.feature.properties.url);
+});
+
 }
