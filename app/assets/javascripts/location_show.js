@@ -1,11 +1,12 @@
 window.onload = function(){
 
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFja3ZjdXJ0cyIsImEiOiJkOEw2U1JnIn0.aeu27bx-JO85y318dm5tSw';
-  var map = L.mapbox.map('map', 'jackvcurts.l24gabk5')
-    .setView([38.89, -77.03], 17);
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+  var map = L.mapbox.map('map', 'jackvcurts.l24gabk5');
   
-  map.on('ready', setLocation);
+  map.on('ready', function(){
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+    setLocation();
+    });
 
   function setLocation(){
       //Populate locations
@@ -28,7 +29,8 @@ window.onload = function(){
   map.featureLayer.on('click', function(e) {
       map.panTo(e.layer.getLatLng());
   });
-  
+
+  //Add popup to marker
   map.featureLayer.on('layeradd', function(e){
     console.log(e);
     var marker = e.layer;
