@@ -16,7 +16,7 @@
 	<%= r.radio_button :rating, 2, {class: "test"}  %>
 	<%= r.radio_button :rating, 3, {class: "test"}  %>
 	<%= r.radio_button :rating, 4, {class: "test"}  %>
-	<%= r.radio_button :rating, 5, {class: "test"}  %> 
+	<%= r.radio_button :rating, 5, {class: "test"}  %>
 	</span>
 	<br>
 	<%= r.submit %>
@@ -29,3 +29,6 @@
  	<li><%= review.rating %></li>
  <%end%>
 </ul>
+
+<h2>Average Rating</h2>
+<%= @rating %>
