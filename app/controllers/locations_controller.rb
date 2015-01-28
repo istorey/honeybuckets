@@ -53,6 +53,11 @@ class LocationsController < ApplicationController
     @reviews = Review.where(location_id: params[:id])
     current_ratings = @reviews.pluck(:rating)
     @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
+    if current_user
+      @user = User.find(session[:user_id])
+    else
+      @user = User.new(name: "guest")
+    end
   end
 
   def new
