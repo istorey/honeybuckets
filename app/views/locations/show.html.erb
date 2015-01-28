@@ -8,6 +8,8 @@
 <% end %>
 </ul>
 
+<h1><%= @current_user %></h1>
+
 <%= form_for [@location, @review] do |r| %>
 	<%= r.label :review %><br>
 	<%= r.text_field :body %><br>
