@@ -35,5 +35,11 @@ window.onload = function(){
     autocomplete: true
   });
 
+  //center on icons
+   map.featureLayer.on('click', function(e) {
+        map.panTo(e.layer.getLatLng());
+    });
+
+
   geocoderControl.addTo(map);
 }
