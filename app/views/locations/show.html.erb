@@ -24,6 +24,14 @@
 <% else %>
 
 <h1><%= @user.name %></h1>
+
+<% if flash[:notice] %>
+<div class="notice">
+<%= flash[:notice] %>
+
+</div>
+<% end %>
+
 <%= form_for [@location, @review] do |r| %>
   <%= r.label :review %><br>
   <%= r.text_field :body %><br>
@@ -49,3 +57,4 @@
 <%= @rating.round(2) %>
 
 <% end %>
+
