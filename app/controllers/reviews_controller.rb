@@ -5,6 +5,8 @@ class ReviewsController < ApplicationController
     @review.user_id = @current_user.id
     @review.location_id = params[:location_id].to_i
     @review.save
+    redirect_to(:back)
+    else
     redirect_to root_path
     end
   end
@@ -16,7 +18,7 @@ class ReviewsController < ApplicationController
 
   def update
   end
-  
+
   def destroy
   end
 
@@ -26,4 +28,3 @@ private
   end
 
 end
-
