@@ -49,10 +49,33 @@ class LocationsController < ApplicationController
     @reviews = Review.where(location_id: params[:id])
     current_ratings = @reviews.pluck(:rating)
     @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
+
+    @geojson = {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [@location.long, @location.lat]
+          },
+          properties: {
+            name: @location.name,
+            address: @location.address,
+            :'marker-color' => '#00607d',
+            :'marker-symbol' => 'circle',
+            :'marker-size' => 'medium',
+            :'url' => location_path(@location),
+            :'rating' => @rating
+          }
+        }
+
     if current_user
       @user = User.find(session[:user_id])
     else
       @user = User.new(name: "guest")
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @geojson }
     end
   end
 
