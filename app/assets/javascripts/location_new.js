@@ -1,4 +1,4 @@
-window.onload = function(){
+$('document').ready(function(){
   
   var markerLat;
   var markerLong;
@@ -74,5 +74,4 @@ window.onload = function(){
       }
     }); 
   });
-
-}
+});

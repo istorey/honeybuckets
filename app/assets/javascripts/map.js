@@ -1,4 +1,4 @@
-window.onload = function(){
+$('document').ready(function(){
 
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFja3ZjdXJ0cyIsImEiOiJkOEw2U1JnIn0.aeu27bx-JO85y318dm5tSw';
   var map = L.mapbox.map('map', 'jackvcurts.l24gabk5')
@@ -70,4 +70,4 @@ window.onload = function(){
     });
 
   geocoderControl.addTo(map);
-}
+});
