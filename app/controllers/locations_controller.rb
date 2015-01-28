@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
-  def home
+  protect_from_forgery
 
+  def home
     @embed = []
     @honey_embed = []
     tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
@@ -12,7 +13,6 @@ class LocationsController < ApplicationController
     honey.each do |tweet|
       @honey_embed << twitter_client.oembed(tweet.id)
     end
-
   end
 
   def map
@@ -61,6 +61,17 @@ class LocationsController < ApplicationController
   end
 
   def create
+    @location = Location.new(location_params)
+    @location.save
 
+    respond_to do |format|
+      format.html
+      format.json { render :json => {location: location_path(@location)} }
+    end
+  end
+
+private
+  def location_params
+    params.require(:location).permit(:name, :lat, :long)
   end
 end
