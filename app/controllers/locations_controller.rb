@@ -37,7 +37,8 @@ class LocationsController < ApplicationController
             address: location.address,
             :'marker-color' => '#00607d',
             :'marker-symbol' => 'circle',
-            :'marker-size' => 'medium'
+            :'marker-size' => 'medium',
+            :'url' => location_path(location),
           }
         }
     end
