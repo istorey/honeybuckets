@@ -1,24 +1,7 @@
 <h1>Home Page - locations#home</h1>
 
-
-<div id="user_nav">
-  <% if current_user %>
-  Welcome, <%= current_user.name %>!
-  <%= link_to "Sign Out", signout_path %>
-  <% else %>
-  <%= link_to "Sign in with Twitter", "/auth/twitter" %>
-  <% end %>
-  <h2><%= link_to "View Map", "/map" %></h2>
-</div>
-
-<% @honey_embed.each do |embed| %>
-<%= raw(embed.html) %>
-<% end %>
-
-
-<% @embed.each do |embed| %>
-<%= raw(embed.html) %>
-<% end %>
+<h2> Welcome to HoneyBuckets</h2>
+<p> The world's most high tech bathroom rating system in the world</p>
 
 <%= form_tag map_path, :method => :get do %>
   <p>

@@ -20,7 +20,19 @@
 	border: 10px 10px 10px 10px;
 }
 
+#map {
+	
+	margin-top: 150px;
+	margin-bottom: 100px;
+	margin-left: -50px;
+	border: 2px solid black;
+	height: 700px;
+	width: 800px;
+}
 
+body {
+	box-sizing: border-box;
+}
 
 
 

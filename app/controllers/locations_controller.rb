@@ -1,19 +1,19 @@
 class LocationsController < ApplicationController
   protect_from_forgery
 
-  def home
-    @embed = []
-    @honey_embed = []
-    tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
-    honey = twitter_client.search("honeybuckets").take(10)
-    #converting tweets to oembed objects
-    tweets.each do |tweet|
-      @embed << twitter_client.oembed(tweet.id)
-    end
-    honey.each do |tweet|
-      @honey_embed << twitter_client.oembed(tweet.id)
-    end
-  end
+  # def home
+  #   @embed = []
+  #   @honey_embed = []
+  #   tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
+  #   honey = twitter_client.search("honeybuckets").take(10)
+  #   #converting tweets to oembed objects
+  #   tweets.each do |tweet|
+  #     @embed << twitter_client.oembed(tweet.id)
+  #   end
+  #   honey.each do |tweet|
+  #     @honey_embed << twitter_client.oembed(tweet.id)
+  #   end
+  # end
 
   def map
     # @ip_address = request.remote_ip
