@@ -1,0 +1,145 @@
+function initialize(){
+    //Initialize map
+    L.mapbox.accessToken = 'pk.eyJ1IjoiamFja3ZjdXJ0cyIsImEiOiJkOEw2U1JnIn0.aeu27bx-JO85y318dm5tSw';
+    var map = L.mapbox.map('map', 'jackvcurts.l24gabk5')
+      .setView([0, 0], 2);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Initialize the geocoder control and add it to the map.
+    var geocoderControl = L.mapbox.geocoderControl('mapbox.places', {
+      autocomplete: true
+    });
+
+    geocoderControl.addTo(map);
+
+  function centerOnUser(){
+    map.locate();
+
+    map.on('locationfound', function(e){
+      map.setView([e.latitude, e.longitude], 17);
+      if (marker){
+        marker.setLatLng([e.latitude, e.longitude]);
+      }
+    });
+  }
+
+  function centerOnSearch(){
+    $.ajax({
+      url: '/map',
+      data: {'search': search},
+      dataType: 'json',
+      type: 'GET',
+      success: function(data){
+        map.setView([data.search.latitude, data.search.longitude], 17);
+      }
+    });
+  }
+
+  function centerOnLocation(){
+    //Populate locations
+    $.ajax({
+      url: window.location.pathname,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data){
+        console.log(data);
+        map.setView([data.geometry.coordinates[1],data.geometry.coordinates[0]], 17);
+      },
+      error: function(){
+        console.log("error");
+      }
+    });
+  }
+
+  function markAllLocations(){
+    $.ajax({
+      url: '/map',
+      dataType: 'json',
+      type: 'GET',
+      success: function(data){
+        console.log(data);
+        map.featureLayer.setGeoJSON(data.locations);
+      }
+    });
+  }
+
+  // Bind popups to each marker
+  function bindPopUps(callback){
+    map.featureLayer.on('layeradd', function(e){
+      var marker = e.layer;
+      var properties = marker.feature.properties;
+      var popupContent =  '<div class="popup">' +
+                        '<h3><a href='+ properties.url +' >' + properties.name + '</a></h3>' +
+                        '<p>' + properties.address + '</p>' +
+                        '<p>' + properties.rating + '</p>' +
+                      '</div>';
+
+
+    marker.bindPopup(popupContent,{
+      closeButton: false,
+      minWidth: 320
+      })
+    });
+    callback();
+  }
+  // Create a draggable marker
+  var marker; 
+  var markerLat;
+  var markerLong; 
+
+  function setDraggableMarker(callback){ 
+    marker = L.marker([0,0], {
+      icon: L.mapbox.marker.icon({
+        'marker-color': '#f86767'
+      }),
+      draggable: true
+    }).addTo(map);
+    callback();
+  }
+
+  function getCoordinates() {
+    var m = marker.getLatLng();
+    markerLat = m.lat;
+    markerLong = m.lng;
+  }
+
+  function createLocationListener() {
+    $('#location_submit').on("click", function(e){
+      e.preventDefault();
+      var name = $('#location_name').val();
+      getCoordinates();
+      var data = {"name": name, "lat": markerLat, "long": markerLong};
+      $.ajax({
+        url:"/locations",
+        dataType: "json",
+        type: "POST",
+        data: {location: data},
+        success: function(response){
+          console.log("responded");
+          var url = response.location;
+          console.log(url);
+          window.location.href = url;
+        }
+      }); 
+    });
+  }
+
+  map.on('ready', function(){
+    if (page === "map" && !search) {
+      bindPopUps(markAllLocations);
+      centerOnUser();
+    }
+    else if (page === "map") {
+      bindPopUps(markAllLocations);
+      centerOnSearch();
+    }
+    else if (page === "show"){
+      bindPopUps(markAllLocations);
+      centerOnLocation();
+    }
+    else if (page === "new"){
+      setDraggableMarker(centerOnUser);
+      createLocationListener();      
+    } 
+  });
+}
