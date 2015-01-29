@@ -15,4 +15,5 @@
  *= require './locations.css'
  *= require locations
  *= require styles
+ *= require review
  */

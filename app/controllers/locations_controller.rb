@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
 
   def map
     @geojson = { locations: []}
-    
+
     if params[:search] && params[:search] != ""
       @search = params[:search]
       @coordinates = Geocoder.search(@search)[0].data["geometry"]["location"]
