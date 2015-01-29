@@ -104,7 +104,12 @@ class LocationsController < ApplicationController
     @street_num = @address_components[0]["long_name"]
     @street = @address_components[1]["long_name"]
     @location.address = @street_num + " " + @street
+    if @location.name == nil
+      flash[:notice]="You must input a name for your new location!"
+      redirect_to(:back)
+    else
     @location.save
+  end
 
     respond_to do |format|
       format.html
