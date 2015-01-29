@@ -1,3 +1,4 @@
+<div class="show-page">
 <div class="whole-body clearfix">
 
  <!-- stuff to the right of the page  -->
@@ -17,7 +18,6 @@
 
 <!-- stuff to the left of the page -->
 <div class="left-body">
-<h2 class="reviews"><%= @location.address %></h2>
 <% if @reviews.length >= 1 %>
   <h2 class="reviews">Average Rating</h2>
   <%= @rating.round(2) %>
@@ -67,16 +67,18 @@
 <% end %>
 </div>
 
-<div class="comment-box" style="width:400px;height:400px;overflow:auto;padding:5px;">
+<div class="comment-box">
   <ul class="reviews-signed-in">
-    <h2 class="reviews">Reviews:</h2>
+    <h2 class="reviews-h2">Reviews:</h2>
     <% @reviews.each do |review| %>
+    <div class="wrap">
       <li><p>Review: <%= review.body %></p></li>
       <li><p>Rating: <%= review.rating %></p></li>
       <li><p>Created: <%= review.created_at.pretty %></p></li>
       <% if current_user == review.user %>
         <li><%= link_to "Delete Review", [review.location, review], method: :delete %></li>
       <% end %>
+    </div>
     <%end%>
   </ul>
 </div>
@@ -88,5 +90,6 @@
   var page = "show";
   initialize();
 </script>
+</div>
 </div>
 </div>
