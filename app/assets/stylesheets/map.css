@@ -1,4 +1,4 @@
-div#map.home-map { 
+div#map.home-map {
 	margin-top: 4%;
 	margin-bottom: 0px;
 	left: 0px;
@@ -11,7 +11,7 @@ div#map.home-map {
 .slider {
 	clear:both;
 	position: absolute;
-	background-color: rgba(134, 200, 242, 0.6);  
+	background-color: rgba(134, 200, 242, 0.6);
 	width:25%;
 	height: 80%;
 	overflow: auto;
@@ -21,7 +21,7 @@ div#map.home-map {
 	padding-bottom: 10px;
 }
 
-input {
+#map-button {
 	position: absolute;
 	margin-left: 5%;
 	margin-top: 10px;
