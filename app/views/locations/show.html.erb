@@ -26,14 +26,9 @@
 
 <ul class="reviews-guest">
  <% @reviews.each do |review| %>
-<<<<<<< HEAD
- 	<li><%= review.body %></li>
- 	<li class="review-rating"><%= review.rating %></li>
-=======
-  <li><%= review.body %></li>
-  <li><%= review.rating %></li>
-  <li><%= review.created_at.pretty %></li>
->>>>>>> kronic
+   <li><p>Review: <%= review.body %></p></li>
+   <li><p>Rating: <%= review.rating %></p></li>
+   <li><p>Created: <%= review.created_at.pretty %></p></li>
  <%end%>
 </ul>
 
@@ -68,14 +63,17 @@
 </div>
 
 <div class="comment-box" style="width:400px;height:400px;overflow:auto;padding:5px;">
-<ul class="reviews-signed-in">
-  <h2 class="reviews">Reviews:</h2>
- <% @reviews.each do |review| %>
-   <li><p>Review: <%= review.body %></p></li>
-   <li><p>Rating: <%= review.rating %></p></li>
-   <li><p>Created at: <%= review.created_at.pretty %></p></li>
- <%end%>
-</ul>
+  <ul class="reviews-signed-in">
+    <h2 class="reviews">Reviews:</h2>
+    <% @reviews.each do |review| %>
+      <li><p>Review: <%= review.body %></p></li>
+      <li><p>Rating: <%= review.rating %></p></li>
+      <li><p>Created: <%= review.created_at.pretty %></p></li>
+      <% if current_user == review.user %>
+        <li><%= link_to "Delete Review", [review.location, review], method: :delete %></li>
+      <% end %>
+    <%end%>
+  </ul>
 </div>
 
 <% end %>
