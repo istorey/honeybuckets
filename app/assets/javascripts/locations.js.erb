@@ -71,7 +71,7 @@ function initialize(){
       var popupContent =  '<div class="popup">' +
                         '<h3><a href='+ properties.url +' >' + properties.name + '</a></h3>' +
                         '<p>' + properties.address + '</p>' +
-                        '<p>' + '<img src= assets/toilet.png> ' + properties.rating + '</p>' +
+                        '<p>' + '<img src= "http://i.imgur.com/J6PKpVQ.png"> ' + properties.rating + '</p>' +
                       '</div>';
 
 
@@ -83,11 +83,11 @@ function initialize(){
     callback();
   }
   // Create a draggable marker
-  var marker; 
+  var marker;
   var markerLat;
-  var markerLong; 
+  var markerLong;
 
-  function setDraggableMarker(callback){ 
+  function setDraggableMarker(callback){
     marker = L.marker([0,0], {
       icon: L.mapbox.marker.icon({
         'marker-color': '#f86767'
@@ -120,7 +120,7 @@ function initialize(){
           console.log(url);
           window.location.href = url;
         }
-      }); 
+      });
     });
   }
 
@@ -139,7 +139,7 @@ function initialize(){
     }
     else if (page === "new"){
       setDraggableMarker(centerOnUser);
-      createLocationListener();      
-    } 
+      createLocationListener();
+    }
   });
 }
