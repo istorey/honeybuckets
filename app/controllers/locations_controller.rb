@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
 
   def home
     # @honey_embed = []
-    # honey = twitter_client.search("honeybuckets").take(10)
+    # honey = twitter_client.search("honeybuckets").take(3)
     # honey.each do |tweet|
     #   @honey_embed << twitter_client.oembed(tweet.id)
     # end
