@@ -16,9 +16,12 @@
 
 <div class="left-body">
 <h2 class="reviews"><%= @location.address %></h2>
-<h2 class="reviews">Average Rating</h2>
-<%= @rating.round(2) %>
-
+<% if @reviews.length >= 1 %>
+  <h2 class="reviews">Average Rating</h2>
+  <%= @rating.round(2) %>
+<% else %>
+  <h2 class="reviews">Be the first to review this bathroom! Please? We'll give you a sticker.</h2>
+<% end %>
 
 
 <% if @user.name == "guest" %>

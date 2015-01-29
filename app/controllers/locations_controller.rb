@@ -32,7 +32,11 @@ class LocationsController < ApplicationController
 
     @locations = Location.all
     @locations.each do |location|
-      rating = location.reviews.average(:rating)
+      if location.reviews.length >= 1
+        rating = location.reviews.average(:rating)
+      else
+        rating = "No ratings yet!"
+      end
       @geojson[:locations] << {
           type: 'Feature',
           geometry: {
@@ -61,8 +65,7 @@ class LocationsController < ApplicationController
     @review = Review.new
     @this = Review.last
     @reviews = Review.where(location_id: params[:id])
-    current_ratings = @reviews.pluck(:rating)
-    @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
+    @rating = @location.reviews.average(:rating)
 
     @geojson = {
           type: 'Feature',
