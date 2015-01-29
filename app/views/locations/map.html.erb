@@ -1,6 +1,4 @@
-<% if @search %>
-  <h2>Honeybuckets near <span id="search"><%= @search %></span></h2>
-<% end %>
+
 
 
 <div id="map" class="home-map"></div>
@@ -12,6 +10,9 @@
       <% end %>
     </ul>
 	</div>
+  <% if @search %>
+     <span id="search"><%= @search %></span>
+  <% end %>
 
 
 <script>

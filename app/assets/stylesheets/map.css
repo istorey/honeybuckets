@@ -23,7 +23,6 @@ div#map.home-map {
 #map-button {
 	position: absolute;
 	margin-left: 5%;
-	margin-top: -4%;
 }
 
 .leaflet-popup-content {
