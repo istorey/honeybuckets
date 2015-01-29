@@ -1,0 +1,22 @@
+#map.home { 
+  position:absolute; 
+  top:0; 
+  left: 25%; 
+  max-width: 1000px; 
+  max-height: 1000px;
+}
+
+.twitter-panel-container {
+	display: none;
+
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	max-height: 5%;
+	max-width: 5%;
+
+}
