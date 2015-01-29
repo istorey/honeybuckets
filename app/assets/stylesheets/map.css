@@ -1,22 +1,27 @@
-#map.home { 
-  position:absolute; 
-  top:0; 
-  left: 25%; 
-  max-width: 1000px; 
-  max-height: 1000px;
+div#map.home-map { 
+	margin-top: 4%;
+	margin-bottom: 0px;
+	margin-left: -320px;
+	border: none;
+	height: 100%;
+	width: 100%;
 }
 
-.twitter-panel-container {
-	display: none;
 
+.slider {
+	clear:both;
+	position: absolute;
+	background: blue;
+	height: 80%;
+	width:25%;
+	opacity: 0.6;
+	margin-left: 5%;
+	margin-top: 5%;
 }
 
-ul {
-	list-style-type: none;
+button {
+	position: absolute;
+	margin-left: 5%;
+	margin-top: 10px;
 }
 
-li {
-	max-height: 5%;
-	max-width: 5%;
-
-}
