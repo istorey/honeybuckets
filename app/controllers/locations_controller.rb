@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
 
   def home
     @honey_embed = []
-    honey = twitter_client.search("honeybuckets").take(3)
+    honey = twitter_client.search("#honeybuckets").take(0) #<- tweets at a time
     honey.each do |tweet|
       @honey_embed << twitter_client.oembed(tweet.id, options = {:hide_media => true, :hide_thread => true})
     end
@@ -50,7 +50,7 @@ class LocationsController < ApplicationController
     end
 
     @honey_embed = []
-    honey = twitter_client.search("Washington D.C.").take(10) #<-tweets at a time
+    honey = twitter_client.search("Washington D.C.").take(0) #<-tweets at a time
     honey.each do |tweet|
       @honey_embed << twitter_client.oembed(tweet.id, options = {:hide_media => true, :hide_thread => true})
     end
