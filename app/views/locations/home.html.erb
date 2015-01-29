@@ -8,7 +8,7 @@
 <%= form_tag map_path, :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search], :class => "field" %>
-    <%= submit_tag "Search Near", :name => nil, :class => "fs" %>
+    <%= submit_tag "Search Buckets", :name => nil, :class => "fs" %>
   </p>
 </div>
 <% end %>
@@ -19,5 +19,13 @@
     <div class="mission-container">
       <h3>Get to know our Application</h3>
       <p>Here at <strong>HoneyBuckets</strong> we believe that all bathrooms are not created equal. We aim to make the world a better place through bathroom analysis technology. We invite you to join the  revlolution and contribute</p>
+    </div>
+    <div class="twitter-container">
+      <h4>What people are saying about HoneyBuckets</h4>
+      <ul>
+        <% @honey_embed.each do |embed| %>
+          <li><%= raw(embed.html) %></li>
+        <% end %>
+      </ul>
     </div>
 </div>
