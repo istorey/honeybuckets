@@ -28,12 +28,17 @@ div#map.home-map {
 .leaflet-popup-content {
 	text-align: center;
 	font-family: Century Gothic;
-  font-size:36px;
+  font-size:38px;
   line-height:24px;
-  background: #C3E5FB;
-  color: gray;
+  background: white;
+  color: black;
   border-radius: 5%;
   /*box-shadow: 2px 2px 0px 2px gray;*/
+}
+
+.leaflet-popup-content a {
+	font-size: 24px;
+	color: blue;
 }
 
 .leaflet-popup-content-wrapper {
