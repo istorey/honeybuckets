@@ -1,11 +1,21 @@
-<h1>Home Page - locations#home</h1>
+<div class="home-page">
 
-<h2> Welcome to HoneyBuckets</h2>
+<div class="home-content">
+  <h2> Welcome to HoneyBuckets</h2>
 <p> The world's most high tech bathroom rating system in the world</p>
 
+<div class=home-form>
 <%= form_tag map_path, :method => :get do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Near", :name => nil %>
+    <%= text_field_tag :search, params[:search], :class => "field" %>
+    <%= submit_tag "Search Near", :name => nil, :class => "fs" %>
   </p>
+</div>
 <% end %>
+</div>
+
+<P> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+
+</div>
