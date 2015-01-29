@@ -4,12 +4,21 @@
 
 
 <div id="map" class="home-map"></div>
-	<button><img src="honeycomb.png"></button>
-	<div class="slider"></div>
-</div>
+
+	<input TYPE="image" SRC="/assets/honeycomb2.png" ALT="img"></INPUT>
+	<div class="clearfix slider">
+
+		<ul>
+      <% @honey_embed.each do |embed| %>
+        <li><%= raw(embed.html) %></li>
+      <% end %>
+    </ul>
+
+	</div>
+
 
 <script>
-$( "button" ).click(function() {
+$( "input" ).click(function() {
   $( ".slider" ).slideToggle( "slow");
 });
 </script>
