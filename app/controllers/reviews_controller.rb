@@ -24,6 +24,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @review = Review.find(params[:id])
+    if @review.delete 
+      redirect_to(:back)
+    end
   end
 
 private
