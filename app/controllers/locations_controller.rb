@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
 
   def map
     @geojson = { locations: []}
-    
+
     if params[:search] && params[:search] != ""
       @search = params[:search]
       @coordinates = Geocoder.search(@search)[0].data["geometry"]["location"]
@@ -59,6 +59,7 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
     @review = Review.new
+    @this = Review.last
     @reviews = Review.where(location_id: params[:id])
     current_ratings = @reviews.pluck(:rating)
     @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
@@ -102,7 +103,7 @@ class LocationsController < ApplicationController
     @address_components = Geocoder.search("#{@location.lat}, #{@location.long}")[0].data["address_components"]
     @street_num = @address_components[0]["long_name"]
     @street = @address_components[1]["long_name"]
-    @location.address = @street_num + @street
+    @location.address = @street_num + " " + @street
     @location.save
 
     respond_to do |format|

@@ -3,7 +3,7 @@
 }
 
 #user_nav {
-	background: #909090;
+	background: #029eac;
 	font-family: Ubuntu;
 	font-size: 20px;
 	padding: .7em;
@@ -13,26 +13,12 @@
 	padding-right: .5em;
 }
 
-.reviews {
-	list-style-type: none;
-	font-family: Ubuntu;
-	font-size: 15px;
-	border: 10px 10px 10px 10px;
+#user_nav a:link {
+	text-decoration: none;
 }
 
-#map {
-	
-	margin-top: 150px;
-	margin-bottom: 100px;
-	margin-left: -50px;
-	border: 2px solid black;
-	height: 700px;
-	width: 800px;
+#user_nav a:visited {
+	text-decoration: none;
 }
-
-body {
-	box-sizing: border-box;
-}
-
 
 
