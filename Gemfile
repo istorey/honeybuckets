@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'hublot'
 gem 'geocoder'
 gem 'twitter'
 gem 'omniauth-twitter'

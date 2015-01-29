@@ -14,8 +14,9 @@
 
 <ul class="reviews">
  <% @reviews.each do |review| %>
- 	<li><%= review.body %></li>
- 	<li><%= review.rating %></li>
+  <li><%= review.body %></li>
+  <li><%= review.rating %></li>
+  <li><%= review.created_at.pretty %></li>
  <%end%>
 </ul>
 
@@ -49,8 +50,9 @@
 
 <ul class="reviews">
  <% @reviews.each do |review| %>
-   <li><%= review.body %></li>
-   <li><%= review.rating %></li>
+   <li><p>Review: <%= review.body %></p></li>
+   <li><p>Rating: <%= review.rating %></p></li>
+   <li><p>Created at: <%= review.created_at.pretty %></p></li>
  <%end%>
 </ul>
 
@@ -58,4 +60,3 @@
 <%= @rating.round(2) %>
 
 <% end %>
-
