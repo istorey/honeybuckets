@@ -16,7 +16,7 @@
   	<% if current_user %>
   		<span class="left_nav"><%= link_to "Home", root_path %></span>
   		<span class="left_nav"><%= link_to "View Map", "/map" %></span>
-  		<%= link_to "Write a Review", new_location_path %>
+  		<span class="left_nav"><%= link_to "Write a Review", new_location_path %></span>
 
  	<span class="login">
   		Welcome, <%= current_user.name %>!
