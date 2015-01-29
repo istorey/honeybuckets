@@ -1,24 +1,29 @@
 .login {
-	float: right; 
+	/*float: right; */
 }
 
 #user_nav {
-	background: #029eac;
-	font-family: Ubuntu;
+	/*background: black;*/
+	font-family: Jura;
 	font-size: 20px;
 	padding: .7em;
+	margin: 10px 40px 0px 40px;
+	float: right;
+	color: white;
 }
 
 .left_nav {
-	padding-right: .5em;
+	padding-right: .9em;
 }
 
 #user_nav a:link {
 	text-decoration: none;
+	color: white;
 }
 
 #user_nav a:visited {
 	text-decoration: none;
+	color: white;
 }
 
 
