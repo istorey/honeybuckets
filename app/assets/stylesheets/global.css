@@ -1,5 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300|Jura|Allerta);
+
 
 body{
-  font-family: "Droid Sans", serif;
+  font-family: "Ubuntu", serif;
+  color: black;
 }
