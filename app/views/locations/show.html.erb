@@ -1,19 +1,21 @@
-<div class="whole-body">
-<div class="right-body">
-<div id="map" class="review-map"></div>
-<div class="nearby">
-<h3>Nearby locations</h3>
-<ul class="reviews">
-<% for location in @location.nearbys(10) %>
-  <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
-<% end %>
-</ul>
-</div>
+<div class="whole-body clearfix">
 
-</div>
+ <!-- stuff to the right of the page  -->
+  <div class="right-body">
+    <h2 class="location-address"><%= @location.address %></h2>
+    <div id="map" class="review-map"></div>
+    <div class="nearby">
+      <h3 class="reviews">Nearby locations</h3>
+      <ul class="reviews">
+      <% for location in @location.nearbys(10) %>
+      <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
 
 
-
+<!-- stuff to the left of the page -->
 <div class="left-body">
 <h2 class="reviews"><%= @location.address %></h2>
 <% if @reviews.length >= 1 %>
@@ -35,10 +37,10 @@
  <%end%>
 </ul>
 
-
+<% if @reviews.length >= 1 %>
 <h2 class="reviews">Average Rating</h2>
 <%= @rating.round(2) %>
-
+<% end %>
 <% else %>
 
 <!-- <h1 class="reviews"><%= @user.name %></h1> -->
