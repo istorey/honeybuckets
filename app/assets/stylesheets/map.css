@@ -13,18 +13,17 @@ div#map.home-map {
 	position: absolute;
 	background-color: rgba(134, 200, 242, 0.6);  
 	width:25%;
-	height: 80%;
+	height: 75%;
 	overflow: auto;
+	margin-top: 3%;
 	margin-left: 5%;
-	margin-top: 5%;
 	border-radius: 5%;
-	padding-bottom: 10px;
 }
 
 input {
 	position: absolute;
 	margin-left: 5%;
-	margin-top: 10px;
+	margin-top: -4%;
 }
 
 .leaflet-popup-content {
@@ -35,7 +34,7 @@ input {
   background: #C3E5FB;
   color: gray;
   border-radius: 5%;
-  box-shadow: 3px 3px 0px 6px gray;
+  /*box-shadow: 2px 2px 0px 2px gray;*/
 }
 
 .leaflet-popup-content-wrapper {
