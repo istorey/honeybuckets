@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   protect_from_forgery
 
-  # def home
+  def home
   #   @embed = []
   #   @honey_embed = []
   #   tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
@@ -13,14 +13,27 @@ class LocationsController < ApplicationController
   #   honey.each do |tweet|
   #     @honey_embed << twitter_client.oembed(tweet.id)
   #   end
-  # end
+  end
 
   def map
+    @geojson = { locations: []}
+    
+    if params[:search] && params[:search] != ""
+      @search = params[:search]
+      @coordinates = Geocoder.search(@search)[0].data["geometry"]["location"]
+      @geojson[:search] = {
+        latitude: @coordinates["lat"],
+        longitude: @coordinates["lng"]
+      }
+    else
+      @search = false
+    end
+
+
     @locations = Location.all
-    @geojson = []
     @locations.each do |location|
       rating = location.reviews.average(:rating)
-      @geojson << {
+      @geojson[:locations] << {
           type: 'Feature',
           geometry: {
             type: 'Point',
