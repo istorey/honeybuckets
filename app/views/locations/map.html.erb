@@ -4,14 +4,18 @@
 
 
 <div id="map" class="home-map"></div>
-	<button><img src="honeycomb.png"></button>
-	<div class="slider"></div>
+	<input TYPE="image" SRC="/assets/honeycomb2.png" ALT="img"></INPUT>
+	<div class="slider">
+		<% @honey_embed = [] %>
+		<% honey = twitter_client.search("#honeybuckets").take(3)%>
+		<% honey.each do |tweet| %>
+    <%=  @honey_embed << twitter_client.oembed(tweet.id) %>
+    <% end %>
+	</div>
 </div>
-<%= javascript_include_tag "map" %>
-
 
 <script>
-$( "button" ).click(function() {
+$( "input" ).click(function() {
   $( ".slider" ).slideToggle( "slow");
 });
 </script>

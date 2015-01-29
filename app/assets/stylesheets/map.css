@@ -20,16 +20,23 @@ div#map.home-map {
 	border-radius: 5%;
 }
 
-button {
+input {
 	position: absolute;
 	margin-left: 5%;
 	margin-top: 10px;
 }
 
-.popup {
+.leaflet-popup-content {
 	text-align: center;
-	font-family: arial;
-  font-size:16px;
+	font-family: Tahoma;
+  font-size:36px;
   line-height:24px;
- 
+  background: #C3E5FB;
+  color: gray;
+  border-radius: 5%;
+  box-shadow: 3px 3px 0px 6px gray;
+}
+
+.leaflet-popup-content-wrapper {
+	border-radius: 5%;
 }
