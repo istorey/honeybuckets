@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'rails_12factor'
 gem 'hublot'
 gem 'geocoder'
 gem 'twitter'
