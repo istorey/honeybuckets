@@ -26,8 +26,14 @@
 
 <ul class="reviews-guest">
  <% @reviews.each do |review| %>
+<<<<<<< HEAD
  	<li><%= review.body %></li>
  	<li class="review-rating"><%= review.rating %></li>
+=======
+  <li><%= review.body %></li>
+  <li><%= review.rating %></li>
+  <li><%= review.created_at.pretty %></li>
+>>>>>>> kronic
  <%end%>
 </ul>
 
@@ -65,15 +71,15 @@
 <ul class="reviews-signed-in">
   <h2 class="reviews">Reviews:</h2>
  <% @reviews.each do |review| %>
-  <div class="wrap">
-   <li><%= review.body %></li>
-   <li>Rating: <%= review.rating %></li>
- </div>
+   <li><p>Review: <%= review.body %></p></li>
+   <li><p>Rating: <%= review.rating %></p></li>
+   <li><p>Created at: <%= review.created_at.pretty %></p></li>
  <%end%>
 </ul>
 </div>
 
 <% end %>
+
 
 <script type="text/javascript">
   var page = "show";

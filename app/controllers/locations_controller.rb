@@ -59,6 +59,7 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
     @review = Review.new
+    @this = Review.last
     @reviews = Review.where(location_id: params[:id])
     current_ratings = @reviews.pluck(:rating)
     @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
