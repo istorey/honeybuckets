@@ -25,24 +25,7 @@
   <h2 class="reviews">Be the first to review this bathroom! Please? We'll give you a sticker.</h2>
 <% end %>
 
-<div class="comment-box">
-  <ul class="reviews-comments">
-    <h2 class="reviews-h2">Reviews:</h2>
-    <% unless @reviews.length >= 1 %>
-    <img src="http://i.imgur.com/JAbQKFh.png?1">
-    <% end %>
-    <% @reviews.each do |review| %>
-    <div class="wrap">
-      <li><p>Review: <%= review.body %></p></li>
-      <li><p>Rating: <%= review.rating %></p></li>
-      <li><p>Created: <%= review.created_at.pretty %></p></li>
-      <% if current_user == review.user %>
-        <li><%= link_to "Delete Review", [review.location, review], method: :delete %></li>
-      <% end %>
-    </div>
-    <%end%>
-  </ul>
-</div>
+
 
 <% if @user.name == "guest" %>
 <!-- <h1 class="reviews"><%#= @user.name %></h1> -->
@@ -76,6 +59,24 @@
 
 
 <% end %>
+<div class="comment-box">
+  <ul class="reviews-comments">
+    <h2 class="reviews-h2">Reviews:</h2>
+    <% unless @reviews.length >= 1 %>
+    <img src="http://i.imgur.com/JAbQKFh.png?1">
+    <% end %>
+    <% @reviews.each do |review| %>
+    <div class="wrap">
+      <li><p>Review: <%= review.body %></p></li>
+      <li><p>Rating: <%= review.rating %></p></li>
+      <li><p>Created: <%= review.created_at.pretty %></p></li>
+      <% if current_user == review.user %>
+        <li><%= link_to "Delete Review", [review.location, review], method: :delete %></li>
+      <% end %>
+    </div>
+    <%end%>
+  </ul>
+</div>
 
 
 <script type="text/javascript">
