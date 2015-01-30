@@ -1,66 +1,66 @@
-body {
-	background-color: #f5fffa;
+
+
+.show-page {
+	background: #E7FDFF;
 }
 
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
 .whole-body {
-	width: 980px;
+	width: 1100px;
+	margin: 0 auto;
 }
 .left-body {
-	width: 370px;
-	padding-left: 75px;
+	width: 350px;
+	padding-left: 50px;
 	padding-right: 10px;
-	position: relative;
+	margin-top: 30px;
+	/*position: relative;*/
 	float: left;
 }
 
 .reviews {
 	list-style-type: none;
-	font-family: Ubuntu;
-	font-size: 15px;
+	font-size: 20px;
 	border: 10px 10px 10px 10px;
+	color: black;
 }
 
 #map.review-map {
 	position: relative;
 	/*right: 500px;*/
-	height:500px;
-	width: 350px;
+	height: 500px;
+	width: 400px;
 	border: 1px solid black;
 }
 
-/*.review-map {
-	max-height: 500px;
-	max-width: 350px;
-	margin-top: 150px;
-	margin-bottom: 100px;
-	margin-left: -50px;
-	border: 2px solid black;
-	margin-left: 500px;
-}*/
-
 
 #review-input {
-	/*background: yellow;*/
 	width: 300px;
-	padding: 20px;
+	padding: 10px;
 }
 
-.reviews-signed-in {
+.reviews-comments {
 	list-style-type: none;
-	font-family: Ubuntu;
 	font-size: 15px;
-	width:400px;
+	width: 400px;
 	height: 300px;
 	padding: 20px;
 	/*box-sizing: border-box;*/
 }
 
+
 .wrap {
     -webkit-border-radius: 4px;
-    /*-moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    border-radius: 8px;*/
     -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
@@ -68,26 +68,21 @@ body {
     -moz-box-orient: vertical;
     display: inline-block;
     width: 300px;
-    background: #EBEBEB;
+    background: white;
     border: 1px solid #CCC;
     margin: 3px auto;
     position: relative;
-    padding: 10px 10px 10px;
+    padding: 8px;
+
 }
 
-.reviews-guest {
-	list-style-type: none;
-	font-family: Ubuntu;
+.wrap p {
 	font-size: 20px;
-	width:500px;
-	height: 300px;
-	padding: 20px;
-	box-sizing: border-box;
+	color: black;
 }
 
 
 .left-body h3 {
-	font-family: Ubuntu;
 }
 
 
@@ -98,10 +93,46 @@ body {
 }
 
 .nearby {
-	float: right;
-	padding: 20px;
+	padding: 15px;
+	margin-left: 100px;
 }
 
 .comment-box {
-	border: 1px solid black;
+	border: 1px solid gray;
+	background: #029eac;
+	padding-bottom: 30px;
+	width: 400px;
+	height: 600px;
+	overflow: auto;
+	padding: 5px;
+}
+
+p {
+	font-size: 12px;
+}
+
+.location-address {
+	margin-left: 100px;
+	font-size: 20px;
+	color: black;
+}
+
+.reviews-rating {
+	font-size: 18px;
+}
+
+.text_field {
+	height: 30px;
+	width: 200px;
+	-webkit-box-sizing: border-box;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.submit {
+	margin-top: .3em;
+}
+
+.reviews-h2 {
+	color: white;
 }

@@ -1,45 +1,34 @@
-<div class="whole-body">
-<div class="right-body">
-<div id="map" class="review-map"></div>
-<div class="nearby">
-<h3>Nearby locations</h3>
-<ul class="reviews">
-<% for location in @location.nearbys(10) %>
-  <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
-<% end %>
-</ul>
-</div>
+<div class="show-page">
+<div class="whole-body clearfix">
 
-</div>
+ <!-- stuff to the right of the page  -->
+  <div class="right-body">
+    <h2 class="location-address"><%= @location.address %></h2>
+    <div id="map" class="review-map"></div>
+    <div class="nearby">
+      <h3 class="reviews">Nearby locations</h3>
+      <ul class="reviews">
+      <% for location in @location.nearbys(10) %>
+      <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
 
 
-
+<!-- stuff to the left of the page -->
 <div class="left-body">
-<h2 class="reviews"><%= @location.address %></h2>
-<h2 class="reviews">Average Rating</h2>
-<%= @rating.round(2) %>
+<% if @reviews.length >= 1 %>
+  <h2 class="reviews">Average Rating</h2>
+  <%= @rating.round(2) %>
+<% else %>
+  <h2 class="reviews">Be the first to review this bathroom! Please? We'll give you a sticker.</h2>
+<% end %>
 
 
 
 <% if @user.name == "guest" %>
-<h1 class="reviews"><%= @user.name %></h1>
-
-<ul class="reviews-guest">
- <% @reviews.each do |review| %>
-<<<<<<< HEAD
- 	<li><%= review.body %></li>
- 	<li class="review-rating"><%= review.rating %></li>
-=======
-  <li><%= review.body %></li>
-  <li><%= review.rating %></li>
-  <li><%= review.created_at.pretty %></li>
->>>>>>> kronic
- <%end%>
-</ul>
-
-
-<h2 class="reviews">Average Rating</h2>
-<%= @rating.round(2) %>
+<!-- <h1 class="reviews"><%#= @user.name %></h1> -->
 
 <% else %>
 
@@ -67,23 +56,33 @@
 <% end %>
 </div>
 
-<div class="comment-box" style="width:400px;height:400px;overflow:auto;padding:5px;">
-<ul class="reviews-signed-in">
-  <h2 class="reviews">Reviews:</h2>
- <% @reviews.each do |review| %>
-   <li><p>Review: <%= review.body %></p></li>
-   <li><p>Rating: <%= review.rating %></p></li>
-   <li><p>Created at: <%= review.created_at.pretty %></p></li>
- <%end%>
-</ul>
-</div>
+
 
 <% end %>
+<div class="comment-box">
+  <ul class="reviews-comments">
+    <h2 class="reviews-h2">Reviews:</h2>
+    <% unless @reviews.length >= 1 %>
+    <img src="http://i.imgur.com/JAbQKFh.png?1">
+    <% end %>
+    <% @reviews.each do |review| %>
+    <div class="wrap">
+      <li><p>Review: <%= review.body %></p></li>
+      <li><p>Rating: <%= review.rating %></p></li>
+      <li><p>Created: <%= review.created_at.pretty %></p></li>
+      <% if current_user == review.user %>
+        <li><%= link_to "Delete Review", [review.location, review], method: :delete %></li>
+      <% end %>
+    </div>
+    <%end%>
+  </ul>
+</div>
 
 
 <script type="text/javascript">
   var page = "show";
   initialize();
 </script>
+</div>
 </div>
 </div>

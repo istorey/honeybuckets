@@ -1,17 +1,19 @@
-<% if @search %>
-  <h2>Honeybuckets near <span id="search"><%= @search %></span></h2>
-<% end %>
-
-
 <div id="map" class="home-map"></div>
-	<button><img src="honeycomb.png"></button>
-	<div class="slider"></div>
-</div>
-<%= javascript_include_tag "map" %>
+	<input type="image" src="http://i.imgur.com/2DCVLlz.png" alt="img" id="map-button"></INPUT>
+	<div class="clearfix slider">
+		<ul>
+      <% @honey_embed.each do |embed| %>
+        <li><%= raw(embed.html) %></li>
+      <% end %>
+    </ul>
+	</div>
+  <% if @search %>
+     <span id="search"><%= @search %></span>
+  <% end %>
 
 
 <script>
-$( "button" ).click(function() {
+$( "input" ).click(function() {
   $( ".slider" ).slideToggle( "slow");
 });
 </script>

@@ -1,0 +1,40 @@
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  }
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+#new-page {
+  text-align: center;
+  width: 1000px;
+  margin: auto;
+}
+#new-page #map {
+  position: relative;
+  float:left;
+  left:0;
+  top:0;
+  width: 600px;
+  margin: 30px;
+}
+
+#new-page .form input {
+  font-size: 1.5em;
+}
+#new-page button {
+  position: relative;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 1.5em;
+}
+#new-page .form {
+  float: left;
+  margin-top: 30px;
+  width: 300px;
+  height: 500px;
+}

@@ -1,12 +1,14 @@
 .login {
-	float: right; 
+	float: right;
 }
 
 #user_nav {
+	z-index: 6;
 	background: #029eac;
-	font-family: Ubuntu;
+/* 	font-family: Ubuntu; */
 	font-size: 20px;
 	padding: .7em;
+	color: white;
 }
 
 .left_nav {
@@ -19,6 +21,9 @@
 
 #user_nav a:visited {
 	text-decoration: none;
+	color: white;
 }
 
-
+#user_nav a:hover {
+	text-decoration: underline;
+}

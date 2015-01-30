@@ -1,14 +1,24 @@
-<div id="map"></div>
+<div id="new-page" class="clearfix">
 
-<h1>location#new</h1>
+  <h1>Create a new bathroom here!</h1>
 
-<div>
-<input type="text" id="location_name">
-<button id="location_submit">Submit</button>
+  <div class="form clearfix">
+    <p>Drag and drop the marker to mark your location, or enter the address in the map's search bar.</p>
+    <h2>What do we call this place?</h2>
+    <input type="text" id="location_name"><br>
+    <button id="location_submit">Submit</button>
+    
+    <% if flash[:notice] %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+  </div>
+  <div id="map"></div>
 
 </div>
 
-<script type="text/javascript">
-  var page = "new";
-  initialize();
-</script>
+  <script type="text/javascript">
+    var page = "new";
+    initialize();
+  </script>

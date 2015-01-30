@@ -3,7 +3,6 @@
 <head>
   <title>Honeybucket</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -14,9 +13,9 @@
 <body>
 	<div id="user_nav">
   	<% if current_user %>
-  		<span class="left_nav"><%= link_to "Home", root_path %></span>
-  		<span class="left_nav"><%= link_to "View Map", "/map" %></span>
-  		<span class="left_nav"><%= link_to "Write a Review", new_location_path %></span>
+  		<span class="left_nav"><%= link_to "HOME", root_path %></span>
+  		<span class="left_nav"><%= link_to "VIEW MAP", "/map" %></span>
+  		<span class="left_nav"><%= link_to "WRITE A REVIEW", new_location_path %></span>
 
  	<span class="login">
   		Welcome, <%= current_user.name %>!

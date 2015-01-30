@@ -2,17 +2,11 @@ class LocationsController < ApplicationController
   protect_from_forgery
 
   def home
-  #   @embed = []
-  #   @honey_embed = []
-  #   tweets = twitter_client.search("q", :geocode => "38.9282240,-77.0604150,10mi").take(10)
-  #   honey = twitter_client.search("honeybuckets").take(10)
-  #   #converting tweets to oembed objects
-  #   tweets.each do |tweet|
-  #     @embed << twitter_client.oembed(tweet.id)
-  #   end
-  #   honey.each do |tweet|
-  #     @honey_embed << twitter_client.oembed(tweet.id)
-  #   end
+    @honey_embed = []
+    honey = twitter_client.search("#honeybuckets").take(3) #<- tweets at a time
+    honey.each do |tweet|
+      @honey_embed << twitter_client.oembed(tweet.id, options = {:hide_media => true, :hide_thread => true})
+    end
   end
 
   def map
@@ -32,7 +26,11 @@ class LocationsController < ApplicationController
 
     @locations = Location.all
     @locations.each do |location|
-      rating = location.reviews.average(:rating)
+      if location.reviews.length >= 1
+        rating = location.reviews.average(:rating)
+      else
+        rating = "No ratings yet!"
+      end
       @geojson[:locations] << {
           type: 'Feature',
           geometry: {
@@ -50,6 +48,13 @@ class LocationsController < ApplicationController
           }
         }
     end
+
+    @honey_embed = []
+    honey = twitter_client.search("Washington D.C.").take(6) #<-tweets at a time
+    honey.each do |tweet|
+      @honey_embed << twitter_client.oembed(tweet.id, options = {:hide_media => true, :hide_thread => true})
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @geojson }
@@ -61,8 +66,7 @@ class LocationsController < ApplicationController
     @review = Review.new
     @this = Review.last
     @reviews = Review.where(location_id: params[:id])
-    current_ratings = @reviews.pluck(:rating)
-    @rating = current_ratings.inject{ |sum, rate| sum + rate}.to_f / current_ratings.size
+    @rating = @location.reviews.average(:rating)
 
     @geojson = {
           type: 'Feature',
@@ -104,7 +108,12 @@ class LocationsController < ApplicationController
     @street_num = @address_components[0]["long_name"]
     @street = @address_components[1]["long_name"]
     @location.address = @street_num + " " + @street
+    if @location.name == nil
+      flash[:notice]="You must input a name for your new location!"
+      redirect_to(:back)
+    else
     @location.save
+  end
 
     respond_to do |format|
       format.html
